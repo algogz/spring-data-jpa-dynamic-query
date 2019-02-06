@@ -22,6 +22,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.Date;
 import java.util.List;
 
@@ -33,6 +35,13 @@ public class EmployeeRepositoryTests {
 
     @Autowired
     private EmployeeService service;
+
+
+    @Autowired
+    private EntityManager entityManager;
+
+//    @Autowired
+//    private JpaEntityInformation entityInformation;
 
 
     @Test
@@ -49,10 +58,25 @@ public class EmployeeRepositoryTests {
         System.out.println(list1);
 
         Employee employeeWhoHasLastNameJoe = new Employee();
-        employeeWhoHasLastNameJoe.setLastName("joe");
+        employeeWhoHasLastNameJoe.setLastName("jo");
 
         //Fetches all the employees whose has joe in there last name
         List<Employee> list2 = service.retrieveEmployees(employeeWhoHasLastNameJoe );
         System.out.println(list2);
+    }
+
+    @Test
+    public void testQuery() {
+        repository.save(new Employee("Jack", "Huang", "MANAGER", new Date()));
+        repository.save(new Employee("Jack", "Joe", "worker", new Date()));
+        repository.save(new Employee("JJ", "Joe", "MANAGER", new Date()));
+
+//        String jpql = "FROM Customer WHERE lastName='Bauer'";
+//        String jpql = "FROM Customer WHERE lastName=:ln";
+        String jpql = "FROM Customer WHERE lastName=:lastName and age>=50";
+        Query query = entityManager.createQuery(jpql);
+        query.setParameter("lastName", "Bauer");
+        List<Customer> list = query.getResultList();
+        list.forEach(System.out::println);
     }
 }

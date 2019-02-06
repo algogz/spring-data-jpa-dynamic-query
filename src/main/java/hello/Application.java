@@ -21,11 +21,11 @@ public class Application {
 	public CommandLineRunner demo(CustomerRepository repository) {
 		return (args) -> {
 			// save a couple of customers
-			repository.save(new Customer("Jack", "Bauer"));
-			repository.save(new Customer("Chloe", "O'Brian"));
-			repository.save(new Customer("Kim", "Bauer"));
-			repository.save(new Customer("David", "Palmer"));
-			repository.save(new Customer("Michelle", "Dessler"));
+			repository.save(new Customer("Jack", "Bauer", 60));
+			repository.save(new Customer("Chloe", "O'Brian", 50));
+			repository.save(new Customer("Kim", "Bauer",25));
+			repository.save(new Customer("David", "Palmer", 66));
+			repository.save(new Customer("Michelle", "Dessler",38));
 
 			// fetch all customers
 			log.info("Customers found with findAll():");

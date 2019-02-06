@@ -21,10 +21,17 @@ public class Customer {
     private Long id;
     private String firstName;
     private String lastName;
+    private Integer age;
 
     public Customer(String firstName, String lastName) {
         this.firstName = firstName;
         this.lastName = lastName;
+    }
+
+    public Customer(String firstName, String lastName, int age) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.age = age;
     }
 }
 
