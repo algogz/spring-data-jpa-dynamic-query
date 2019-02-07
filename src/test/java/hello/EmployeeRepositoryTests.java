@@ -79,4 +79,12 @@ public class EmployeeRepositoryTests {
         List<Customer> list = query.getResultList();
         list.forEach(System.out::println);
     }
+
+    @Test
+    public void testOrdering() {
+        String jpql = "FROM Customer where age>=40 order by age desc";
+        Query query = entityManager.createQuery(jpql);
+        List<Customer> list = query.getResultList();
+        list.forEach(System.out::println);
+    }
 }
